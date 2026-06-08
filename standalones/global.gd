@@ -1,3 +1,7 @@
 extends Node
 
-var player 
+
+enum States {
+	START,
+}
+var state : States = States.START

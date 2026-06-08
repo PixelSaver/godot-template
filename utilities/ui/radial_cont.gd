@@ -1,5 +1,6 @@
 @tool
 extends Container
+## Osu-like container to scroll through options
 class_name RadialContainer
 
 @export var radius := 100.0 : 
@@ -149,19 +150,13 @@ func _update_children():
 		var current_angle = scroll_angle + (i * theta)
 		# Distance from selected idx# angular distance from center
 		var angle_dist = abs(current_angle)
-		
 		if flip: 
 			current_angle = PI - current_angle
-		
 		var pos = center + Vector2(cos(current_angle), sin(current_angle)) * radius
 		
-		
 		var dist = angle_dist / theta
-		
 		var _scale = pow(1.0 / (1.0 + dist * scale_multiplier), 1.5)
-		
 		child.pivot_offset_ratio = Vector2(0.0, 0.5) if not flip else Vector2(1.0, 0.5)
-		
 		var child_size = child.get_combined_minimum_size()
 		fit_child_in_rect(child, Rect2(pos - (child_size / 2.0), child_size))
 		child.scale = Vector2(_scale, _scale)
@@ -170,7 +165,6 @@ func _gui_input(event: InputEvent) -> void:
 	var scroll_strength = 0.05
 	if target_scroll_angle > 0 or target_scroll_angle < -(_get_layout_children().size() - 1) * get_theta():
 		scroll_strength = 0.025
-		
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
