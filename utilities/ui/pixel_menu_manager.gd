@@ -1,4 +1,5 @@
-extends Control 
+extends Control
+
 class_name PixelMenuManager
 
 enum MenuManagerState {
@@ -11,6 +12,6 @@ enum MenuManagerState {
 	## There are two menus, one ending, one starting
 	TRANSITIONING_BOTH,
 }
-var state : MenuManagerState = MenuManagerState.SINGLE
-var current_scene : PixelMenu
-var previous_scene : PixelMenu
+var state: MenuManagerState = MenuManagerState.SINGLE
+var current_scene: PixelMenu
+var previous_scene: PixelMenu

@@ -1,3 +1,3 @@
 extends Node
 
-signal test(test:bool)
+signal test(test: bool)
