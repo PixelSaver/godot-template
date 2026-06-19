@@ -33,6 +33,7 @@ func _find_shatterables(node: Node) -> Array:
 	return result
 
 func _shatter_colorrect(rect):
+	var v = Voronoi.new()
 	var rect_global_pos = rect.position
 	var rect_size = rect.size
 	var rect_color: Color
@@ -51,10 +52,10 @@ func _shatter_colorrect(rect):
 
 	# Generate random points within the rectangle
 	var bounds = Rect2(rect_global_pos, rect_size)
-	var points: Array[Vector2] = Voronoi.generate_random_points(num_points, bounds)
+	var points: Array[Vector2] = v.generate_random_points(num_points, bounds)
 	
 	# Generate Voronoi cells
-	var cells = Voronoi.generate_voronoi_cells(points, bounds)
+	var cells = v.generate_voronoi_cells(points, bounds)
 	
 	# Spawn a polygon for each Voronoi cell
 	for cell in cells:
