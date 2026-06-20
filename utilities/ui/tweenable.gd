@@ -12,7 +12,9 @@ var par: Control
 
 
 func _ready() -> void:
-	par = get_parent() as Control
+	if not par:
+		par = get_parent() as Control
+	par.offset_transform_enabled = true
 	await get_tree().process_frame
 	og_gl_pos = par.global_position
 	og_pos = par.position
@@ -20,6 +22,10 @@ func _ready() -> void:
 
 func custom_tween(_t: Tween, _dur: float, _is_inverse: bool = false):
 	pass
+
+
+func get_final_offset():
+	return dir.normalized() * speed * 100
 
 
 func get_final_global_pos():
