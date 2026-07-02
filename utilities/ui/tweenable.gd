@@ -1,6 +1,6 @@
 @tool
-extends Node
 class_name Tweenable
+extends Node
 
 
 @export_range(0.0, 1.0, .0001) var tween_value: float = 0.0 :

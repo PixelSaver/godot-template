@@ -1,6 +1,5 @@
 extends Node
 
-
 enum States {
 	START,
 }
