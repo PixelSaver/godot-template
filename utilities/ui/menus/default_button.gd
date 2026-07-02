@@ -1,7 +1,31 @@
+@tool
 extends Button
 class_name DefaultButton
 
 var t : Tween
+
+func _enter_tree() -> void:
+	if not Engine.is_editor_hint():
+		return
+	call_deferred("_ensure_label")
+	call_deferred("_apply_min_size")
+func _apply_min_size():
+	self.custom_minimum_size = Vector2(100, 120)
+func _ensure_label():
+	for child in get_children():
+		if child is RichTextLabel:
+			return
+	var label = RichTextLabel.new()
+	add_child(label)
+	label.owner = get_tree().edited_scene_root # required for editor persistence
+	label.fit_content = true
+	label.scroll_active = false
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.shortcut_keys_enabled = false
+	label.set_anchors_preset(Control.PRESET_FULL_RECT)
+	label.clip_contents = false
+	label.text = "Default Button"
 
 func _ready() -> void:
 	self.pivot_offset_ratio = Vector2(0.5, 0.5)
