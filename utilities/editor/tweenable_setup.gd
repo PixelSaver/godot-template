@@ -18,18 +18,19 @@ func _run() -> void:
 	var children = []
 	
 	# Create all children first
-	for parent in selection:
+	for i in range(selection.size()):
+		var parent = selection[i]
 		if parent is Node:
 			# Instance the child
 			var child = Tweenable.new()
-			child.name = "Tweenable_%s" % str(randi() % 1000)
+			child.name = "Tweenable_%s" % str(hash(i))
 			
 			# Randomize export vars
 			var dirs = [Vector2.DOWN, Vector2.UP, Vector2.LEFT, Vector2.RIGHT]
 			#var dirs = [Vector2(1,1), Vector2(-1,-1)]
-			child.dir = dirs[randi_range(0, dirs.size()-1)]
+			child.direction = dirs[randi_range(0, dirs.size()-1)]
 			#child.speed = pow(randf(), 4) * 12
-			child.speed = randf_range(0, 10)
+			child.distance = randf_range(0, 10)
 			
 			children.append({"parent": parent, "child": child})
 	

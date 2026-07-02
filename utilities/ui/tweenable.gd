@@ -2,29 +2,31 @@
 extends Node
 class_name Tweenable
 
-@export var dir : Vector2 = Vector2.ZERO
-@export var speed : float = 0
-@export_tool_button("Randomize speed") var randomize_action = _randomize_speed
-var og_gl_pos : Vector2
-var og_pos : Vector2
-var par : Control
 
-func _randomize_speed():
-	speed = randf_range(0.2, 4.0)
+@export_range(0.0, 1.0, .0001) var tween_value: float = 0.0 :
+	set(val):
+		tween_value = val
+		apply(val)
+@export var use_local_transform := false
+@export var direction : Vector2 = Vector2.ZERO
+@export var distance: float = 100.0
+@export_tool_button("Randomize distance") var randomize_action = _randomize_distance
+var parent : Control
+
+func _randomize_distance():
+	distance = randf_range(0.2, 4.0) * 100
 
 func _ready() -> void:
-	par = get_parent() as Control
-	await get_tree().process_frame
-	og_gl_pos = par.global_position
-	og_pos = par.position
+	parent = get_parent() as Control
+	if not parent: 
+		push_warning("Tweenable <%s> could not find it's parent, queue_free()ing" % self)
+		queue_free()
+	parent.offset_transform_enabled = true
+	parent.offset_transform_pivot_ratio = Vector2.ONE * 0.5
 
-func custom_tween(_t:Tween, _dur:float, _is_inverse:bool=false):
-	pass
-
-func get_final_global_pos():
-	return og_gl_pos + dir.normalized() * speed * 100
-func get_final_local_pos():
-	return og_pos + dir.normalized() * speed * 100
-
-func get_delta():
-	return dir.normalized() * speed * 100
+func apply(t:float) -> void:
+	var offset = direction.normalized() * distance * t
+	if use_local_transform:
+		offset *= parent.get_transform() 
+	
+	parent.offset_transform_position = offset

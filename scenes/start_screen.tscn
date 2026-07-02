@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://ntda7takqfc0"]
 
 [ext_resource type="Script" uid="uid://cj4pcxg1uy6" path="res://scenes/start_screen.gd" id="1_tx5wa"]
+[ext_resource type="Script" uid="uid://b4pdlxyjxim6i" path="res://utilities/ui/tweenable.gd" id="2_o7i0r"]
 
-[node name="StartScreen" type="Control" unique_id=44145697]
+[node name="StartMenu" type="Control" unique_id=44145697]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,3 +11,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tx5wa")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1292825062]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+offset_transform_enabled = true
+
+[node name="Tweenable" type="Node" parent="ColorRect" unique_id=286381308]
+script = ExtResource("2_o7i0r")
+metadata/_custom_type_script = "uid://b4pdlxyjxim6i"
