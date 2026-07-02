@@ -49,7 +49,7 @@ theme_override_constants/margin_right = 50
 layout_mode = 2
 
 [node name="TweenableShowcase" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer" unique_id=899641483]
-custom_minimum_size = Vector2(150, 50)
+custom_minimum_size = Vector2(150, 80)
 layout_mode = 2
 script = ExtResource("2_xm27e")
 metadata/_custom_type_script = "uid://crut4r5gwigu0"
