@@ -1,5 +1,5 @@
 extends PixelMenu
-class_name StartMenu
+class_name TweenableShowcase
 
 var all_t : Array[Tweenable] = []
 var t: Tween 
@@ -14,12 +14,13 @@ func _process(_delta: float) -> void:
 		end_anim()
 
 func start_anim() -> void: 
+	print("All tweenable size: %s" % all_t.size())
+	if t and t.is_running(): t.kill()
+	t = default_tween()
 	for table in all_t:
-		if t and t.is_running(): t.kill()
-		t = default_tween()
 		t.tween_property(table, "tween_value", 1.0, 0.7)
 func end_anim() -> void: 
+	if t and t.is_running(): t.kill()
+	t = default_tween()
 	for table in all_t:
-		if t and t.is_running(): t.kill()
-		t = default_tween()
-		t.tween_property(table, "tween_value", 1.0, 0.7)
+		t.tween_property(table, "tween_value", 0.0, 0.7)

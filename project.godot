@@ -35,6 +35,10 @@ folder_colors={
 "res://utilities/": "teal"
 }
 
+[gui]
+
+theme/custom="uid://djxds56cenfds"
+
 [input]
 
 scroll_up={
