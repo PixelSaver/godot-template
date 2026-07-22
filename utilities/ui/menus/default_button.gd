@@ -9,7 +9,8 @@ func _enter_tree() -> void:
 		return
 	call_deferred("_ensure_label")
 func _ensure_label():
-	self.custom_minimum_size = Vector2(150, 80)
+	if self.custom_minimum_size == Vector2.ZERO:
+		self.custom_minimum_size = Vector2(150, 80) 
 	
 	for child in get_children():
 		if child is RichTextLabel:
